@@ -28,5 +28,7 @@
     "submit": "Set Password",
     "success": "Password set successfully",
     "failed": "Failed to set password"
-  }
+  },
+  "welcomeMessage": "Welcome to our application",
+  "loginButton": "Login"
 }

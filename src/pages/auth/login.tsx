@@ -1,14 +1,17 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useLoginForm } from "../../hooks/useForm";
 import { useLogin } from "@/src/services/hooks/auth/use-login";
 import { BaseInput } from "@/src/components/BaseInput";
 import { useTranslation } from "react-i18next";
+import { useRouter } from "next/router";
 import LanguageSwitcher from "@/src/components/LanguageSwitcher/LanguageSwitcher";
 
 const Login = () => {
   const { t } = useTranslation("common");
+
+
   const { register, handleSubmit, formState: { errors } } = useLoginForm();
   const [message, setMessage] = useState("");
   const { isLoading, login, data, error } = useLogin();
@@ -26,7 +29,6 @@ const Login = () => {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen py-2">
-      <LanguageSwitcher />
       <h1 className="text-3xl font-bold mb-4">{t("login.title")}</h1>
       <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-sm">
         <BaseInput

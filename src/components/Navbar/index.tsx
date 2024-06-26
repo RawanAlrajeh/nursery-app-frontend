@@ -1,17 +1,18 @@
-import { useLogout } from "@/src/services/hooks/auth/use-logout";
-import React from "react";
+import React from 'react';
+import { useRouter } from 'next/router';
+import { useLogout } from '@/src/services/hooks/auth/use-logout';
 
+const Navbar = () => {
+  const { logout, isLoading } = useLogout();
+  const router = useRouter();
 
-const Navbar: React.FC = () => {
-  const { logout } = useLogout();
+  const handleLogout = async () => {
+    logout();
+  };
 
   return (
-    <nav className="bg-blue-500 text-white py-4 px-8 flex justify-between items-center">
-      <div className="text-2xl font-bold">Nursery App</div>
-      <button
-        onClick={logout}
-        className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
-      >
+    <nav>
+      <button onClick={handleLogout} disabled={isLoading}>
         Logout
       </button>
     </nav>

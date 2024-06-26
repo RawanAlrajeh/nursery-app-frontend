@@ -3,12 +3,12 @@ const i18nConfig = {
   i18n: {
     defaultLocale: 'en',
     locales: ['en', 'ar'],
-    localeDetection: false,
+    localeDetection: true,
   },
   ns: ['common'],
   defaultNS: 'common',
   backend: {
-    loadPath: './public/locales/{{lng}}/{{ns}}.json',
+    loadPath: '/locales/{{lng}}/{{ns}}.json',
   },
   react: {
     useSuspense: false,

@@ -10,12 +10,12 @@ const withAuth = (WrappedComponent) => {
 
     useEffect(() => {
       setIsClient(true); // Ensure this runs only on the client side
-      if (!authToken) {
-        router.replace("/auth/login"); // Redirect to login if no token
+      if (!authToken && router.pathname !== '/') {
+        router.replace("/auth/login"); // Redirect to login if no authToken
       }
     }, [authToken, router]);
 
-    if (!isClient || !authToken) {
+    if (!isClient || (!authToken && router.pathname !== '/')) {
       return null; // Render nothing or a loading indicator until client-side check is done
     }
 

@@ -38,18 +38,6 @@ export const authApis = {
     );
     return response.data;
   },
-  // verifyCode: async (payload: { code: string }, token: string) => {
-  //   const response = await axios.post(
-  //     `${process.env.NEXT_PUBLIC_API_URL}auth/verify-code`,
-  //     payload,
-  //     {
-  //       headers: {
-  //         Authorization: `Bearer ${token}`,
-  //       },
-  //     }
-  //   );
-  //   return response.data;
-  // },
   verifyCode: async (payload: { code: string; otpToken: string }) => {
     const response = await axios.post(
       `${process.env.NEXT_PUBLIC_API_URL}auth/verify-code`,
@@ -67,6 +55,19 @@ export const authApis = {
     const response = await axios.post(
       `${process.env.NEXT_PUBLIC_API_URL}auth/set-password`,
       payload
+    );
+    return response.data;
+  },
+
+  logout: async (token: string) => {
+    const response = await axios.post(
+      `${process.env.NEXT_PUBLIC_API_URL}auth/logout`,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
     );
     return response.data;
   },
