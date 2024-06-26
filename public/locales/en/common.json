@@ -1,0 +1,32 @@
+{
+  "login": {
+    "title": "Login",
+    "email": "Email",
+    "password": "Password",
+    "submit": "Login",
+    "success": "Login successful",
+    "failed": "Login failed"
+  },
+  "verify": {
+    "verifyYourAccount": "Verify Your Account",
+    "EnterVerificationCode": "Enter Verification Code",
+    "verify": "Verify"
+  },
+  "userManagement": {
+    "title": "User Management",
+    "name": "username",
+    "email": "Email",
+    "role": "Role",
+    "mother": "Mother",
+    "nursery": "Nursery",
+    "submit": "Register"
+  },
+  "setPassword": {
+    "title": "Set Your Password",
+    "password": "New Password",
+    "confirmPassword": "Confirm New Password",
+    "submit": "Set Password",
+    "success": "Password set successfully",
+    "failed": "Failed to set password"
+  }
+}
