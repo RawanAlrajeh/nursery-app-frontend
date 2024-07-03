@@ -16,6 +16,7 @@ export const useVerifyCode = () => {
   const router = useRouter();
   const otpToken = useAuthStore((state) => state.otpToken);
   const setAuthToken = useAuthStore((state) => state.setAuthToken);
+  const role = useAuthStore((state) => state.role); // Get the role from the store
   const [error, setError] = useState<ErrorState | null>(null);
 
   const {
@@ -30,8 +31,15 @@ export const useVerifyCode = () => {
         throw new Error("No OTP token available");
       }
       const response = await authApis.verifyCode({ ...payload, otpToken });
-      setAuthToken(response.newToken); // Set the new token after verification
       return response;
+    },
+    onSuccess: (response) => {
+      setAuthToken(response.newToken); // Set the new token after verification
+      if (role === 'admin') {
+        router.push('/dashboard'); // Redirect to dashboard for admin
+      } else if (role === 'nursery') {
+        router.push('/nursery'); // Redirect to nursery for nursery role
+      }
     },
     onError: (error: AxiosError<ErrorResponse>) => {
       const message = error.response?.data.message || "Unknown error";
@@ -43,9 +51,8 @@ export const useVerifyCode = () => {
   useEffect(() => {
     if (data?.newToken) {
       setAuthToken(data.newToken);
-      router.push("/dashboard");
     }
-  }, [data, setAuthToken, router]);
+  }, [data, setAuthToken]);
 
   return { isLoading, verifyCode: mutate, data, error };
 };

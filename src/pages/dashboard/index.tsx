@@ -1,12 +1,14 @@
 import React from 'react';
+import withAuth from '@/src/routes/withAuth/withAuth';
+import DashboardLayout from '@/src/components/layouts/DashboardLayout/DashboardLayout';
 
 const DashboardPage: React.FC = () => {
   return (
-    <div>
+    <DashboardLayout>
       <h1>Welcome to the Dashboard</h1>
       <p>This is your dashboard page.</p>
-    </div>
+    </DashboardLayout>
   );
 };
 
-export default DashboardPage;
+export default withAuth(DashboardPage);

@@ -5,9 +5,10 @@ import '../styles/globals.css';
 import AppWrapper from '../components/AppWrapper/AppWrapper';
 import { useRouter } from 'next/router';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import withAuth from '@/src/routes/withAuth/withAuth';
 import { appWithTranslation } from 'next-i18next';
 import '../utils/i18n/i18n'; // Ensure this import is present to initialize i18n
+import { ReactQueryDevtools } from 'react-query/devtools';
+import withAuth from '../routes/withAuth/withAuth';
 
 const queryClient = new QueryClient();
 
@@ -27,6 +28,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     <QueryClientProvider client={queryClient}>
       <AppWrapper>
         <WrappedComponent {...pageProps} />
+        <ReactQueryDevtools initialIsOpen={false} />
       </AppWrapper>
     </QueryClientProvider>
   );

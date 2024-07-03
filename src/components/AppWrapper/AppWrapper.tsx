@@ -1,8 +1,8 @@
 import { ReactNode, useEffect } from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { useRouter } from "next/router";
-import Navbar from "../Navbar";
 import { useTranslation } from "react-i18next";
+import LandingNavbar from "../Navbar/LandingNavbar/LandingNavbar";
 
 const queryClient = new QueryClient();
 
@@ -14,10 +14,6 @@ const AppWrapper = ({ children }: AppWrapperProps) => {
   const router = useRouter();
   const { t, i18n } = useTranslation("common");
 
-  // List of routes where the Navbar should not appear
-  const authRoutes = ["/auth/login", "/auth/register", "/auth/verify"];
-  const isAuthRoute = authRoutes.includes(router.pathname);
-
   const { lang } = router.query;
 
   useEffect(() => {
@@ -28,7 +24,7 @@ const AppWrapper = ({ children }: AppWrapperProps) => {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {!isAuthRoute && <Navbar />}
+      {router.pathname === "/" && <LandingNavbar />}
       {children}
     </QueryClientProvider>
   );

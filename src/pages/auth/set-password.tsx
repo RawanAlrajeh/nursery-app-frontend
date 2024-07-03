@@ -6,22 +6,26 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/router";
 import { useSetPassword } from "@/src/services/hooks/auth/use-set-password";
-import { BaseInput } from "@/src/components/BaseInput";
+import { BaseInput } from "@/src/core/BaseInput";
 import { useTranslation } from "react-i18next";
 import LanguageSwitcher from "@/src/components/LanguageSwitcher/LanguageSwitcher";
 
-const setPasswordSchema = z.object({
-  password: z.string().min(6, "Password must be at least 6 characters"),
-  confirmPassword: z.string().min(6, "Password must be at least 6 characters")
-}).superRefine(({ password, confirmPassword }, ctx) => {
-  if (password !== confirmPassword) {
-    ctx.addIssue({
-      code: z.ZodIssueCode.custom,
-      message: "Passwords do not match",
-      path: ["confirmPassword"],
-    });
-  }
-});
+const setPasswordSchema = z
+  .object({
+    password: z.string().min(6, "Password must be at least 6 characters"),
+    confirmPassword: z
+      .string()
+      .min(6, "Password must be at least 6 characters"),
+  })
+  .superRefine(({ password, confirmPassword }, ctx) => {
+    if (password !== confirmPassword) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "Passwords do not match",
+        path: ["confirmPassword"],
+      });
+    }
+  });
 
 type SetPasswordFormValues = z.infer<typeof setPasswordSchema>;
 
